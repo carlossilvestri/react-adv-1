@@ -8,11 +8,11 @@ export { ProductButtons } from "./ProductButtons";
 export { ProductImage } from "./ProductImage";
 export { ProductTitle } from "./ProductTitle";
 
-export const ProductCard : ProductCardHOCProps |any = Object.assign(ProductCardHOC,
+export const ProductCard1 : any  = Object.assign(ProductCardHOC,
     {
         Title: ProductTitle,
         Image: ProductImage,
         Buttons: ProductButtons
     })
-
+export const ProductCard : ProductCardHOCProps = ProductCard1;
 export default ProductCard;
