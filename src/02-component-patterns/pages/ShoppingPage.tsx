@@ -1,71 +1,54 @@
 import { ProductImage, ProductTitle, ProductButtons } from "../components";
 import { ProductCard } from "../components";
 import { products } from "../data/products";
-import { useShoppingCart } from "../hooks/useShoppingCart";
 import "../styles/custom-styles.css";
+import { useContext } from 'react';
+import { ProductContext } from '../components/ProductCard';
 
+const product = products[0];
 
 export const ShoppingPage = () => {
-  const {shoppingCart, onProductCountChange  } = useShoppingCart();
-
+  // TODO - maxCount
+  const { increaseBy, counter, maxCount } = useContext(ProductContext);
+  // TODO - isMaxReached = useCakkback, dependencies [ count, maxCount]
+  // TRUE si el count === maxCount
+  // FALSE si no lo es.
   return (
     <div>
       <h1>Shopping Store</h1>
       <hr />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-        }}
-      >
-        {/* <ProductCard product={product} >
-          <ProductCard.Image/>
-          <ProductCard.Title title={'Cafe'}/>
-          <ProductCard.Buttons />
-        </ProductCard> */}
-        {products.map((product) => (
-          <ProductCard
-            product={product}
-            className="bg-dark text-white"
-            key={product.id}
-            onChange={(evento) => onProductCountChange(evento)}
-            value={ shoppingCart && shoppingCart[product.id]?.count || 0 }
-          >
-            <ProductImage className="custom-image" />
-            <ProductTitle
-              className="text-white text-bold"
-              title={"Cafe personalizado"}
-            />
-            <ProductButtons className="custom-buttons" />
-          </ProductCard>
-        ))}
-      </div>
-
-      <div className="shopping-cart">
-        {shoppingCart &&
-          Object.entries(shoppingCart).map( ([key, product]) => (
-            <ProductCard
-            product={product}
-            className="bg-dark text-white"
-            key={key}
-            style={{ width: "100px" }}
-            onChange={onProductCountChange}
-            value={product.count}
-          >
-            <ProductImage className="custom-image" />
-            <ProductButtons
-              className="custom-buttons"
-              style={{ display: "flex", justifyContent: "center" }}
-            />
-          </ProductCard>
-          ))
-        }
-      </div>
       <div>
-        <code>{JSON.stringify(shoppingCart, null, 5)}</code>
-        <hr />
-        <code>{ shoppingCart && JSON.stringify(Object.entries(shoppingCart), null, 5)}</code>
+        <ProductCard
+          product={product}
+          className="bg-dark text-white"
+          key={product.id}
+          initialValues={{
+            count: 6,
+            maxCount: 11,
+          }}
+        >
+          {(args) => (
+            <>
+              <ProductImage
+                className="custom-image"
+                style={{ boxShadow: "10px 10px 10px rgba(0,0,0,0.2)" }}
+              />
+              <ProductTitle
+                className="text-white text-bold"
+                title={"Cafe personalizado"}
+              />
+              <ProductButtons className="custom-buttons" />
+              {/* <button onClick={reset}>Reset</button> */}
+              <button onClick={args.reset}>Reset</button>
+              <button onClick={() => args.increaseBy(-2)}>-2</button>
+              {
+                ( !args.isMaxCountReached && <button onClick={() => args.increaseBy(2)}>+2</button> )
+              }
+              <span>{ args.count } - maxCount</span>
+              { JSON.stringify(args, null, 3) }
+            </>
+          )}
+        </ProductCard>
       </div>
     </div>
   );
