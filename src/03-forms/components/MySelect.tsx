@@ -8,8 +8,7 @@ interface Props {
 }
 
 export const MySelect = ({ label, ...props }: Props) => {
-  const [ field] = useField(props);
-  console.log('field ', field);
+  const [ field ] = useField(props);
   return (
     <>
         <label htmlFor={ props.id || props.name } >{ label }</label>

@@ -1,0 +1,76 @@
+[
+    {
+        "type": "input",
+        "name": "firstName",
+        "placeholder": "Carlos",
+        "label": "First Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "required",
+                "errorMessage": "Este campo es requerido."
+            },
+            {
+                "type": "minLength",
+                "value": 3,
+                "errorMessage": "Minimo 3 caracteres."
+            }
+        ]
+    },
+    {
+        "type": "input",
+        "name": "lastName",
+        "placeholder": "Silvestri",
+        "label": "Last Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "required",
+                "errorMessage": "Este campo es requerido."
+            }
+        ]
+    },
+    {
+        "type": "input",
+        "name": "email",
+        "placeholder": "john@google.com",
+        "label": "Email",
+        "value": "",
+        "validations": [
+            {
+                "type": "required",
+                "errorMessage": "Este campo es requerido."
+            },
+            {
+                "type": "email",
+                "errorMessage": "El correo no es valido."
+            }
+        ]
+    },
+    {
+        "type": "select",
+        "name": "favoriteGame",
+        "label": "Favorite Game",
+        "value": "",
+        "validations": [
+            {
+                "type": "required",
+                "errorMessage": "Este campo es requerido."
+            }
+        ],
+        "options": [
+            {
+                "id": 1,
+                "value": "Super Smash"
+            },
+            {
+                "id": 2,
+                "value": "Metal Gear"
+            },
+            {
+                "id": 3,
+                "value": "Resident Evail"
+            }
+        ]
+    }
+]
